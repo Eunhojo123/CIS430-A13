@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- ======================================================================= -->
+<!-- config.xml                                                              -->
+<!-- ======================================================================= -->
+
+    <!-- =================================================================== -->
+    <!-- Change  ASURITE to your ASUrite id                                  -->
+    <!-- Change 'version' below to suit your needs                           -->
+    <!-- =================================================================== -->
+
+<widget 
+    id                      = "MotionVisual"
+    android-packageName     = "edu.asu.cis430.spring23.ASURITE.MotionVisual"
+    version                 = "23.2.0" 
+    xmlns                   = "https://www.w3.org/ns/widgets">
+
+    <!-- =================================================================== -->
+    <!-- Change 'name', 'description', and 'author' tags below               -->
+    <!-- =================================================================== -->
+
+    <name>Motion Visual</name>
+
+    <description>
+        Graphs the X, Y, and Z coordinates of your mobile devices motion sensor 
+        (the accelerometer) 
+    </description>
+
+    <author email="ASURITE@asu.edu" href="http://www.asu.edu">
+        FIRSTNAME LASTNAME
+    </author>
+
+    <content src="index.html" />  <!-- the starting point of your hybrid app -->
+
+    <!-- =================================================================== -->
+    <!-- Android Engine 11.x.x supports Android 5.1 - 12, Android SDK 22-32  -->
+    <!-- =================================================================== -->
+    <engine name="android" spec="11.0.0" />
+
+    <!-- =================================================================== -->
+    <!-- General Preferences: configure defaults for your hybrid app         -->
+    <!-- for example:                                                        -->
+    <!-- Orientation: values: landscape, portrait, or default (allow both)   -->
+    <!-- DisallowOverscroll: have the webview not "bounce" when touched      -->
+    <!-- android-minSdkVersion:  set minimum threshhold of OS versions       -->
+     <!--  SDK/API Level | version       | Codename        | Year             -->
+    <!-- ===============+===============+=================+=====             -->
+    <!--        33      | Android 13    | Tiramisu        | 2022             -->
+    <!--        31/32   | Android 12    | Snow Cone       | 2021             -->
+    <!--        30      | Android 11    | Red Velvet Cake | 2020             -->
+    <!--        29      | Android 10    | Quice Tart      | 2019             -->
+    <!--        28      | Android 9.0.0 | Pie             | 2018             -->
+    <!--        27      | Android 8.1.0 | Oreo            | 2017             -->
+    <!--        22      | Android 5.1.1 | Lillipop        | 2015             -->
+    <!--   for more see https://apilevels.com/ or                            -->
+    <!-- https://source.android.com/source/build-numbers.html                -->
+    <!-- more preferences are available at                                   -->
+    <!-- and https://cordova.apache.org/docs/en/11.x/config_ref/index.html   -->
+    <!-- =================================================================== -->
+    <preference name = "Orientation"           value = "portrait"       />
+    <preference name = "DisallowOverscroll"    value = "true"           />
+    <preference name = "android-minSdkVersion" value = "22"             />
+
+    <!-- =================================================================== -->
+    <!-- Plugins are libraries that extend the base functionality of the     -->
+    <!-- HTML/CSS/JS model to include device specific features of mobile     -->
+    <!-- see https://volt.build/docs/core_plugins/                           -->
+    <!-- and https://cordova.apache.org/docs/en/latest/#plugin-apis          -->
+    <!-- =================================================================== -->
+
+    <!-- https://github.com/apache/cordova-plugin-device-motion -->
+    <plugin name="cordova-plugin-device-motion"                         />
+
+    <!-- =================================================================== -->
+    <!-- These are for the cordova-plugin-statusbar plugin                   -->
+    <!-- https://github.com/apache/cordova-plugin-statusbar                  -->
+    <!-- =================================================================== -->
+    <plugin     name="cordova-plugin-statusbar"                         />
+    <preference name="StatusBarOverlaysWebView" value="false"           />
+    <preference name="StatusBarBackgroundColor" value="#FFC627"         />
+    <preference name="StatusBarStyle"           value="lightcontent"    />
+
+    <!-- =================================================================== -->
+    <!-- These are for the splashscreen when the app starts up               -->
+    <!-- =================================================================== -->
+    <preference name="SplashScreenDelay"                    value="2000" />
+    <preference name="AutoHideSplashScreen"                 value="true" />
+    <preference name="AndroidWindowSplashScreenAnimatedIcon"  
+                                      value="resources/splashTemplate.png" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#000000" />
+
+    <!-- =================================================================== -->
+    <!-- cordova-plugin-cleartext - enables unencrypted text to be passed to -->
+    <!-- servers, it is not secure, but ok for developmental testing         -->
+    <!-- NOTE BY DEFAULT FOR DEVELOPEMENT ONLY, WE ALL ANY ACCESS TO ANY SITE-->
+    <!-- with access origin="*"                                              -->
+    <!-- this is NOT a best practice for development where you lock down     -->
+    <!-- permitted domains - for more details and examples, see              -->
+    <!-- http://cordova.apache.org/docs/en/latest/guide/appdev/whitelist/    -->
+    <!-- =================================================================== -->
+    <plugin     name="cordova-plugin-cleartext"                         />
+    <access     origin="*"                                              />
+    <access     origin="http://*.googleapis.com"    subdomains="true"   />
+    <access     origin="http://*.gstatic.com"       subdomains="true"   />
+
+    <!-- =================================================================== -->
+    <!-- allow-intents: if the user selects the url, allow the               -->
+    <!-- system (mobile os) to honor the users intent and open it            -->
+    <!-- =================================================================== -->
+    <allow-intent href="http://*/*"      />       <!-- open browser          -->
+    <allow-intent href="https://*/*"     />       <!-- open browser          -->
+    <allow-intent href="tel:*"           />       <!-- dial phone #          -->
+    <allow-intent href="sms:*"           />       <!-- send a text           -->
+    <allow-intent href="mailto:*"        />       <!-- open mail to          -->
+    <allow-intent href="geo:*"           />       <!-- open maps             -->
+
+    <!-- =================================================================== -->
+    <!-- Platform specific configurations (e.g. ios, android, Electron )     -->
+    <!-- =================================================================== -->
+    <platform name="android">  
+        <!-- open google playstore if url starts with market:* -->
+        <allow-intent href="market:*"       /> 
+    </platform>
+
+    <platform name="ios">
+        <!-- open App Store on iOS -->
+        <allow-intent href="itms:*"         />
+        <allow-intent href="itms-apps:*"    />
+        
+        <!-- To use the location, camera, or photos, must ask permission -->
+        <edit-config    target="NSLocationAlwaysUsageDescription" 
+                        file="*-Info.plist" mode="overwrite">
+            <string>Allow the app to know your location?</string>
+        </edit-config>
+        <edit-config    target="NSLocationWhenInUseUsageDescription" 
+                        file="*-Info.plist" mode="overwrite">
+            <string>Allow the app to know your location?</string>
+        </edit-config>
+        <edit-config    target="NSCameraUsageDescription" 
+                        file="*-Info.plist" mode="overwrite">
+            <string>App would like to access Camera to take picture of any 
+                    document that you want to upload as attachment to your 
+                    message</string>
+        </edit-config>
+         <edit-config   target="NSPhotoLibraryUsageDescription" 
+                        file="*-Info.plist" mode="overwrite">
+            <string>Allow the app to open Photo Library to take picture of any 
+                    document that you want to upload as attachment to your 
+                    message</string>
+        </edit-config>
+    </platform>      
+
+</widget>
